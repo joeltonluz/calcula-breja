@@ -109,7 +109,7 @@ ${formattedItems}
             title="Doe uma cerveja"
           >
             <Heart size={20} fill="currentColor" />
-            <span>Apoiar</span>
+            <span>Doar</span>
           </button>
         </div>
       </header>
@@ -337,11 +337,11 @@ ${formattedItems}
         .btn-donation-trigger {
           display: flex;
           align-items: center;
-          gap: 6px;
-          background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+          gap: 4px;
+          background: linear-gradient(135deg, #df880e 0%, #dc2626 100%);
           color: #ffffff;
           border: none;
-          padding: 8px 14px;
+          padding: 8px 12px;
           border-radius: 12px;
           font-family: var(--font-heading);
           font-weight: 600;
@@ -556,8 +556,8 @@ ${formattedItems}
         }
 
         .cheapest-badge {
-          background-color: var(--accent);
-          color: #ffffff;
+          background-color: var(--accent-light);
+          color: var(--accent);
         }
 
         .beer-numbers {

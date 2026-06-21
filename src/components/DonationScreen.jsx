@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { ArrowLeft, Copy, Check, Heart, Beer } from 'lucide-react';
-
+import { ArrowLeft, Beer, Check, Copy, Heart } from "lucide-react";
+import { useState } from "react";
 
 export default function DonationScreen({ onBack }) {
   const [copied, setCopied] = useState(false);
-  const pixKey = 'doacao@calculabreja.com.br'; // Mock Pix key (developer's email)
+  const pixKey =
+    "00020101021126580014br.gov.bcb.pix0136d5c8a37d-77c7-49e0-8925-694adcd79cf35204000053039865802BR5916JOELTON LINO LUZ6008VARGINHA62070503***63040D6C"; // Mock Pix key (developer's email)
 
   const handleCopy = () => {
     navigator.clipboard.writeText(pixKey);
@@ -15,7 +15,11 @@ export default function DonationScreen({ onBack }) {
   return (
     <div className="donation-container glass-panel">
       <header className="donation-header">
-        <button className="btn-icon" onClick={onBack} aria-label="Voltar para calculadora">
+        <button
+          className="btn-icon"
+          onClick={onBack}
+          aria-label="Voltar para calculadora"
+        >
           <ArrowLeft size={24} />
         </button>
         <h2>Doe uma Cerveja</h2>
@@ -27,90 +31,93 @@ export default function DonationScreen({ onBack }) {
           <Heart size={20} className="heart-float" />
         </div>
 
-        <h3>Pague uma rodada! 🍻</h3>
+        <h3>🍻 Pague uma rodada! 🍻</h3>
         <p className="motivation-text">
-          Se a <strong>CalculaBreja</strong> te ajudou a economizar no churrasco ou no bar, que tal apoiar o desenvolvedor pagando uma rodada de cerveja?
+          Se a <strong>CalculaBreja</strong> te ajudou a economizar uma grana
+          🤑, apoie o desenvolvedor pagando uma cerveja?
         </p>
 
         <div className="qr-container">
-          {/* Beautifully stylized mock Pix QR Code */}
-          <svg className="pix-qr-svg" viewBox="0 0 200 200" width="180" height="180">
-            {/* Background */}
-            <rect width="200" height="200" rx="16" fill="#ffffff" />
-            {/* QR Pattern (stylized lines/rects) */}
-            <rect x="20" y="20" width="40" height="40" fill="#1c1917" />
-            <rect x="25" y="25" width="30" height="30" fill="#ffffff" />
-            <rect x="30" y="30" width="20" height="20" fill="#1c1917" />
-
-            <rect x="140" y="20" width="40" height="40" fill="#1c1917" />
-            <rect x="145" y="25" width="30" height="30" fill="#ffffff" />
-            <rect x="150" y="30" width="20" height="20" fill="#1c1917" />
-
-            <rect x="20" y="140" width="40" height="40" fill="#1c1917" />
-            <rect x="25" y="145" width="30" height="30" fill="#ffffff" />
-            <rect x="30" y="150" width="20" height="20" fill="#1c1917" />
-
-            {/* Random QR Grid Pixels */}
-            <rect x="75" y="20" width="10" height="20" fill="#1c1917" />
-            <rect x="90" y="35" width="15" height="10" fill="#1c1917" />
-            <rect x="110" y="20" width="20" height="15" fill="#1c1917" />
-            <rect x="75" y="50" width="10" height="10" fill="#1c1917" />
-            <rect x="95" y="55" width="25" height="15" fill="#1c1917" />
-            
-            <rect x="20" y="75" width="20" height="10" fill="#1c1917" />
-            <rect x="35" y="90" width="15" height="20" fill="#1c1917" />
-            <rect x="20" y="120" width="10" height="10" fill="#1c1917" />
-            
-            <rect x="140" y="75" width="15" height="15" fill="#1c1917" />
-            <rect x="165" y="80" width="15" height="10" fill="#1c1917" />
-            <rect x="140" y="100" width="20" height="10" fill="#1c1917" />
-            <rect x="150" y="120" width="10" height="15" fill="#1c1917" />
-
-            <rect x="75" y="140" width="20" height="10" fill="#1c1917" />
-            <rect x="80" y="155" width="15" height="25" fill="#1c1917" />
-            <rect x="110" y="140" width="10" height="15" fill="#1c1917" />
-            <rect x="105" y="165" width="20" height="15" fill="#1c1917" />
-
-            <rect x="140" y="145" width="10" height="10" fill="#1c1917" />
-            <rect x="160" y="150" width="20" height="10" fill="#1c1917" />
-            <rect x="150" y="170" width="15" height="10" fill="#1c1917" />
-
-            {/* Central Pix Logo */}
-            <circle cx="100" cy="100" r="22" fill="#ffffff" />
-            <circle cx="100" cy="100" r="18" fill="#77cca4" />
-            {/* PIX Chevron shape */}
-            <path d="M93 94 L100 87 L107 94 L100 101 Z" fill="#326e5d" />
-            <path d="M93 106 L100 99 L107 106 L100 113 Z" fill="#326e5d" />
-          </svg>
+          <img
+            src="./qr-code.png"
+            alt="QR Code Pix"
+            className="pix-qr-img"
+            width="180"
+            height="180"
+          />
         </div>
 
         <div className="pix-id-box">
           <span className="pix-label">Chave Pix</span>
           <div className="pix-input-wrapper">
-            <input type="text" readOnly value={pixKey} className="pix-key-input" />
-            <button className={`btn-copy ${copied ? 'copied' : ''}`} onClick={handleCopy}>
+            <input
+              type="text"
+              readOnly
+              value={pixKey}
+              className="pix-key-input"
+            />
+            <button
+              className={`btn-copy ${copied ? "copied" : ""}`}
+              onClick={handleCopy}
+            >
               {copied ? <Check size={18} /> : <Copy size={18} />}
-              <span>{copied ? 'Copiado!' : 'Copiar'}</span>
+              <span>{copied ? "Copiado!" : "Copiar"}</span>
             </button>
           </div>
         </div>
 
+        <div className="community-box">
+          <span className="pix-label">Comunidade</span>
+          <a
+            href="https://chat.whatsapp.com/HzgGW1xdWByHnbGkHHKRDn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="whatsapp-card"
+          >
+            <div className="whatsapp-info">
+              <svg
+                className="whatsapp-icon"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="currentColor"
+              >
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.966a9.9 9.9 0 0 0-6.98-2.879c-5.443 0-9.87 4.37-9.874 9.8-.001 2.02.535 3.997 1.549 5.728L1.9 21.087l4.747-1.933zm11.399-6.84c-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.15-.174.2-.298.3-.496.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z" />
+              </svg>
+              <div>
+                <h4>PromoBreja (Varginha)</h4>
+                <p>Cerveja e Carne em Promoção!</p>
+              </div>
+            </div>
+            <span className="btn-join">Entrar</span>
+          </a>
+        </div>
+
         <div className="developer-box">
           <span className="pix-label">Desenvolvedor</span>
-          <div className="dev-card">
-            <span className="dev-name">Joelton Lino Luz</span>
-            <a 
-              href="https://www.linkedin.com/in/joeltonluz" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="btn-linkedin"
-            >
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          <a
+            href="https://www.linkedin.com/in/joeltonluz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="linkedin-card"
+          >
+            <div className="linkedin-info">
+              <svg
+                className="linkedin-icon"
+                viewBox="0 0 24 24"
+                width="22"
+                height="22"
+                fill="currentColor"
+              >
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
               </svg>
-              <span>LinkedIn</span>
-            </a>
-          </div>
+              <div>
+                <h4>LinkedIn</h4>
+                <p>Conecte-se e mande um feedback!</p>
+              </div>
+            </div>
+            <span className="btn-connect">Conectar</span>
+          </a>
         </div>
       </main>
 
@@ -201,8 +208,10 @@ export default function DonationScreen({ onBack }) {
           justify-content: center;
         }
 
-        .pix-qr-svg {
+        .pix-qr-img {
           display: block;
+          max-width: 100%;
+          height: auto;
         }
 
         .pix-id-box {
@@ -265,50 +274,136 @@ export default function DonationScreen({ onBack }) {
           background-color: var(--accent);
         }
 
-        .developer-box {
+        .community-box {
           width: 100%;
           text-align: left;
           margin-top: 24px;
         }
 
-        .dev-card {
+        .whatsapp-card {
           display: flex;
           align-items: center;
           justify-content: space-between;
           padding: 14px 18px;
-          border: 1px solid var(--border);
+          border: 1px solid rgba(37, 211, 102, 0.2);
           border-radius: 12px;
           background-color: var(--bg-primary);
           gap: 12px;
-          flex-wrap: wrap;
+          text-decoration: none;
+          transition: all var(--transition-fast) ease-out;
         }
 
-        .dev-name {
+        .whatsapp-card:hover {
+          border-color: rgba(37, 211, 102, 0.5);
+          background-color: rgba(37, 211, 102, 0.05);
+          transform: translateY(-1px);
+        }
+
+        .whatsapp-info {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          text-align: left;
+        }
+
+        .whatsapp-icon {
+          color: #25D366;
+          flex-shrink: 0;
+        }
+
+        .whatsapp-info h4 {
+          margin: 0 0 2px 0;
+          font-size: 0.95rem;
+          color: var(--text-primary);
           font-family: var(--font-heading);
           font-weight: 600;
-          font-size: 1rem;
-          color: var(--text-primary);
         }
 
-        .btn-linkedin {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background-color: #0077b5;
+        .whatsapp-info p {
+          margin: 0;
+          font-size: 0.8rem;
+          color: var(--text-secondary);
+        }
+
+        .btn-join {
+          background-color: #25D366;
           color: #ffffff;
-          border: none;
-          padding: 8px 14px;
+          padding: 6px 12px;
           border-radius: 8px;
           font-family: var(--font-heading);
           font-weight: 600;
-          font-size: 0.85rem;
-          text-decoration: none;
-          transition: background-color var(--transition-fast), transform var(--transition-fast);
+          font-size: 0.8rem;
+          transition: background-color var(--transition-fast);
         }
 
-        .btn-linkedin:hover {
-          background-color: #005582;
+        .whatsapp-card:hover .btn-join {
+          background-color: #20ba5a;
+        }
+
+        .developer-box {
+          width: 100%;
+          text-align: left;
+          margin-top: 16px;
+        }
+
+        .linkedin-card {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 14px 18px;
+          border: 1px solid rgba(0, 119, 181, 0.2);
+          border-radius: 12px;
+          background-color: var(--bg-primary);
+          gap: 12px;
+          text-decoration: none;
+          transition: all var(--transition-fast) ease-out;
+        }
+
+        .linkedin-card:hover {
+          border-color: rgba(0, 119, 181, 0.5);
+          background-color: rgba(0, 119, 181, 0.05);
           transform: translateY(-1px);
+        }
+
+        .linkedin-info {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          text-align: left;
+        }
+
+        .linkedin-icon {
+          color: #0077b5;
+          flex-shrink: 0;
+        }
+
+        .linkedin-info h4 {
+          margin: 0 0 2px 0;
+          font-size: 0.95rem;
+          color: var(--text-primary);
+          font-family: var(--font-heading);
+          font-weight: 600;
+        }
+
+        .linkedin-info p {
+          margin: 0;
+          font-size: 0.8rem;
+          color: var(--text-secondary);
+        }
+
+        .btn-connect {
+          background-color: #0077b5;
+          color: #ffffff;
+          padding: 6px 12px;
+          border-radius: 8px;
+          font-family: var(--font-heading);
+          font-weight: 600;
+          font-size: 0.8rem;
+          transition: background-color var(--transition-fast);
+        }
+
+        .linkedin-card:hover .btn-connect {
+          background-color: #005582;
         }
       `}</style>
     </div>
