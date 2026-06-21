@@ -1,4 +1,4 @@
-import { Heart, Moon, Plus, Sparkles, Sun, Trash2 } from "lucide-react";
+import { Heart, Moon, Plus, Sparkles, Sun, Trash2, Share2 } from "lucide-react";
 import { useMemo, useState } from "react";
 
 export default function HomeScreen({
@@ -13,6 +13,42 @@ export default function HomeScreen({
   const [name, setName] = useState("");
   const [volume, setVolume] = useState("");
   const [price, setPrice] = useState("");
+  const [shareCopied, setShareCopied] = useState(false);
+
+  const handleShare = () => {
+    if (sortedBeers.length === 0) return;
+
+    const formattedItems = sortedBeers
+      .map((beer, index) => {
+        const icon = index === 0 ? "🥇" : "🍺";
+        return `${icon} *${beer.name}* (${beer.volume}ml)\n   De R$ ${beer.price.toFixed(2)} por *R$ ${beer.pricePerLiter.toFixed(2)}/L*`;
+      })
+      .join("\n\n");
+
+    const shareText = `📊 *Minha Comparação de Cervejas no Calcula Breja!*
+
+Aqui estão as melhores opções que encontrei agora, ordenadas da mais barata por litro:
+
+${formattedItems}
+
+---
+📱 Calcule você também no *Calcula Breja*:
+👉 https://joeltonluz.github.io/calcula-breja/
+
+💬 Participe do nosso grupo de Promoção de Cerveja no WhatsApp (Varginha):
+👉 https://chat.whatsapp.com/HzgGW1xdWByHnbGkHHKRDn?mode=gi_t`;
+
+    if (navigator.share) {
+      navigator.share({
+        title: "CalculaBreja",
+        text: shareText,
+      }).catch((err) => console.log("Erro ao compartilhar:", err));
+    } else {
+      navigator.clipboard.writeText(shareText);
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 2000);
+    }
+  };
 
   // Predefined volumes for quick entry
   const commonVolumes = [190, 300, 330, 350, 355, 473, 600, 1000];
@@ -146,10 +182,16 @@ export default function HomeScreen({
         <div className="list-header">
           <h2>Lista de Comparação</h2>
           {beers.length > 0 && (
-            <button className="btn-clear" onClick={onClearBeers}>
-              <Trash2 size={16} />
-              <span>Limpar</span>
-            </button>
+            <div className="list-header-actions">
+              <button className="btn-share" onClick={handleShare} type="button">
+                <Share2 size={16} />
+                <span>{shareCopied ? "Copiado!" : "Compartilhar"}</span>
+              </button>
+              <button className="btn-clear" onClick={onClearBeers} type="button">
+                <Trash2 size={16} />
+                <span>Limpar</span>
+              </button>
+            </div>
           )}
         </div>
 
@@ -391,6 +433,31 @@ export default function HomeScreen({
         .list-header h2 {
           font-size: 1.2rem;
           font-weight: 600;
+        }
+
+        .list-header-actions {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .btn-share {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          background: transparent;
+          border: none;
+          color: var(--primary);
+          font-size: 0.85rem;
+          font-weight: 600;
+          cursor: pointer;
+          padding: 4px 8px;
+          border-radius: 6px;
+          transition: background-color var(--transition-fast);
+        }
+
+        .btn-share:hover {
+          background-color: var(--primary-light);
         }
 
         .btn-clear {
